@@ -1,0 +1,22 @@
+{
+  "name": "template",
+  "version": "1.0.0",
+  "description": "RN模板代码工具",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shangwfa",
+  "license": "ISC",
+  "dependencies": {
+    "camelcase": "^4.1.0",
+    "capitalize": "^1.0.0",
+    "commander": "^2.12.2",
+    "dot": "^1.1.2",
+    "lodash": "^4.17.4",
+    "reserved-words": "^0.1.2"
+  },
+  "bin": {
+    "template": "bin/template.js"
+  }
+}
