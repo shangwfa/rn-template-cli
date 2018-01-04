@@ -1,5 +1,5 @@
 {
-  "name": "template",
+  "name": "rntemplate",
   "version": "0.0.1",
   "description": "RN模板代码工具",
   "repository": {
@@ -21,6 +21,6 @@
     "reserved-words": "^0.1.2"
   },
   "bin": {
-    "template": "./index.js"
+    "rntemplate": "./index.js"
   }
 }

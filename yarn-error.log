@@ -16,7 +16,7 @@ Platform:
 npm manifest: 
   {
     "name": "template",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "description": "RN模板代码工具",
     "repository": {
       "type": "git",
@@ -27,7 +27,7 @@ npm manifest:
       "test": "echo \"Error: no test specified\" && exit 1"
     },
     "author": "shangwfa",
-    "license": "ISC",
+    "license": "Apache-2.0",
     "dependencies": {
       "camelcase": "^4.1.0",
       "capitalize": "^1.0.0",
@@ -37,7 +37,7 @@ npm manifest:
       "reserved-words": "^0.1.2"
     },
     "bin": {
-      "template": "bin/template.js"
+      "template": "./index.js"
     }
   }
 
@@ -74,7 +74,7 @@ Lockfile:
     resolved "http://registry.npm.taobao.org/reserved-words/download/reserved-words-0.1.2.tgz#00a0940f98cd501aeaaac316411d9adc52b31ab1"
 
 Trace: 
-  Error: https://registry.npm.taobao.org/template: unauthorized
+  Error: http://registry.npmjs.org/template: You do not have permission to publish "template". Are you logged in as the correct user?
       at Request.params.callback [as _callback] (/Users/menmen/.nvm/versions/node/v8.9.3/lib/node_modules/yarn/lib/cli.js:62098:18)
       at Request.self.callback (/Users/menmen/.nvm/versions/node/v8.9.3/lib/node_modules/yarn/lib/cli.js:123085:22)
       at emitTwo (events.js:126:13)
