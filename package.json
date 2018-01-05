@@ -17,6 +17,8 @@
     "capitalize": "^1.0.0",
     "commander": "^2.12.2",
     "dot": "^1.1.2",
+    "insert-line": "^1.1.0",
+    "linebyline": "^1.3.0",
     "lodash": "^4.17.4",
     "reserved-words": "^0.1.2"
   },

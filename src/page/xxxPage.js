@@ -1,10 +1,9 @@
 import React from 'react'
 import {View} from 'react-native'
 import BasePage from '../page/BasePage'
-import {Header} from '../components'
-import {color,constant} from '../components/Theme'
+import {CommonKeyValueItem,Button} from '../components'
 
-class {{=it.name}} extends BasePage {
+class xxxPage extends BasePage {
 
     static defaultProps = {
         header: {
@@ -12,17 +11,9 @@ class {{=it.name}} extends BasePage {
         },
     }
 
-    constructor(props){
+    constructor(props) {
         super(props)
         this.state = {}
-    }
-
-    componentDidMount() {
-        //网络请求，业务处理
-    }
-
-    xxx = () => {
-
     }
 
 
@@ -42,8 +33,7 @@ class {{=it.name}} extends BasePage {
         )
     }
 
-
 }
 
 
-export default {{=it.name}}
+export default xxxPage

@@ -5,6 +5,8 @@ const path = require('path')
 const dot = require('dot')
 const program = require('commander')
 const _ = require('lodash')
+const insertLine = require('insert-line')
+const readline = require('linebyline')
 
 
 const curDir = __dirname//获取当前目录
@@ -31,14 +33,15 @@ program
 
     })
 
+
 //处理page
-processPage =  (pageName) => {
+processPage = (pageName) => {
     templateParam.name = pageName + 'Page'
     const templateFileName = 'page.js'
     loadTemplateCode(templateFileName)
         .then(template => {
             let source = instantiateTemplateCode(templateParam, template)
-            let fileName = templateParam.name + '.js';
+            let fileName = './src/page/' + templateParam.name + '.js';
             fs.stat(fileName, (err, stat) => {
                 if (stat && stat.isFile()) {
                     console.log('文件已经存在');
@@ -46,6 +49,7 @@ processPage =  (pageName) => {
                     writeSource(fileName, source)
                         .then(() => {
                             console.log('创建成功')
+                            processFile(pageName)
                         })
                 }
             })
@@ -53,6 +57,44 @@ processPage =  (pageName) => {
         .catch(error => {
             console.log(error);
         })
+}
+
+//处理文件
+processFile = (pageName) => {
+    let insertFirstLine=0
+    let insertSecondLine=0
+    let routerSettingFilePath = './src/constants/routerSetting.js'
+    let routerPathFilePath='./src/constants/RouterPaths.js'
+    let importStr = 'import ' + pageName + ' from ' + '\'../page/' + pageName + 'Page\''
+    let routerStr = '   '+pageName + ':{' + 'screen:' + pageName + '},'
+    let pathStr='   '+pageName+':\''+pageName+'\','
+    let settingRl = readline(routerSettingFilePath)
+    settingRl.on('line', (line, lineCount, byteCount) => {
+        // console.log('line:' + line, ' lineCount' + lineCount)
+        if (line.indexOf('insert-import') != -1) {
+            insertFirstLine=lineCount
+        }
+
+        if (line.indexOf('insert-router') != -1) {
+            insertSecondLine=lineCount
+        }
+
+        if(insertFirstLine!==0&&insertSecondLine!==0){
+            insertLine(routerSettingFilePath).content(importStr).at(insertFirstLine).then(err=>{
+                insertLine(routerSettingFilePath).content(routerStr).at(insertSecondLine+1).then(err=>{})
+            })
+
+        }
+
+
+    })
+
+    let pathRl=readline(routerPathFilePath)
+    pathRl.on('line', (line, lineCount, byteCount) => {
+        if (line.indexOf('insert-path') != -1) {
+            insertLine(routerPathFilePath).content(pathStr).at(lineCount).then(err=>{})
+        }
+    })
 }
 
 // 写入代码到当前目录下
@@ -78,7 +120,7 @@ instantiateTemplateCode = (templateParam, templateSource) => {
 //加载模板代码
 loadTemplateCode = (templateFileName) => {
     return new Promise((resolve, reject) => {
-        fs.readFile(path.join(curDir+'/template', templateFileName), 'utf-8', (err, data) => {
+        fs.readFile(path.join(curDir + '/template', templateFileName), 'utf-8', (err, data) => {
             if (err) {
                 reject(err)
             } else {
